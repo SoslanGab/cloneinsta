@@ -148,9 +148,10 @@ if ($imgUploadError === UPLOAD_ERR_OK) {
     }
 }
 
-if (isset($login, $password, $username, $imgDestinationPath) && !isset($_SESSION['signupErr'])) {
+if (isset($login) && isset($password) && isset($username) && isset($imgDestinationPath) && !isset($_SESSION['signupErr'])) {
     signup($login, $password, $username, $imgDestinationPath);
 } else {
     echo "Something went wrong!";
+    echo $_SESSION['signupErr'];
     exit();
 }
