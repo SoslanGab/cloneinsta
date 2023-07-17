@@ -1,3 +1,11 @@
+<?php
+session_start();
+if (isset($_SESSION['id'])) {
+    header('Location: index.php?err=SignUpFailedUserLoggedIn');
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +13,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign up</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
 <body>
@@ -24,7 +32,7 @@
         <input type="file" name="uploadProfileImage" accept="image/*">
         <button type="submit">Sign up</button>
     </form>
-    <script src="js/main.js"></script>
+    <script src="assets/js/main.js"></script>
 </body>
 
 </html>
