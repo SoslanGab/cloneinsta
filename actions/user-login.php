@@ -24,7 +24,7 @@ require 'connection.php';
 $login = htmlspecialchars(strtolower($_POST['login']));
 
 try {
-    $queryUsers = $pdoChat->prepare("SELECT * FROM user INNER JOIN computer ON user.id = computer.idUser WHERE user.login = :login");
+    $queryUsers = $pdoChat->prepare("SELECT * FROM users WHERE users.login = :login");
     $queryUsers->execute([':login' => $login]);
     $fetchedUser = $queryUsers->fetchAll();
 } catch (PDOException $exception) {
@@ -39,9 +39,9 @@ if ($fetchedUser === []) {
 }
 
 
-function login(array $fetch, string $password, string $usrIpAdrr)
+function login(array $fetch, string $password)
 {
-    if (password_verify($password, $fetch['password']) && $fetch['ipAdress'] === $usrIpAdrr) {
+    if (password_verify($password, $fetch['password'])) {
         $_SESSION['idUserConnected'] = $fetch['id'];
         header('Location: user-connected.php');
         exit();
@@ -54,4 +54,4 @@ function login(array $fetch, string $password, string $usrIpAdrr)
 }
 
 
-login($fetchedUser[0], $_POST['password'], $_SERVER['REMOTE_ADDR']);
+login($fetchedUser[0], $_POST['password']);

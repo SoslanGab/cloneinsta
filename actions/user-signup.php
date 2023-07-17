@@ -8,7 +8,7 @@ function validateLogin($login)
 {
     if (empty($login)) {
         return "Login is required.";
-    } elseif (!preg_match('/^[a-zA-Z0-9]{8,12}$/', $login)) {
+    } elseif (!preg_match('/^[a-zA-Z0-9]{6,12}$/', $login)) {
         return "The login does not meet the requirements!";
     }
     return null;
@@ -19,7 +19,7 @@ function validatePassword($password, $confirmPassword)
 {
     if (empty($password)) {
         return "Password is required.";
-    } elseif (!preg_match('/^(?=.*\d)(?=.*[A-Za-z])[0-9A-Za-z!@#$%]{8,12}$/', $password)) {
+    } elseif (!preg_match('/^(?=.*\d)(?=.*[A-Za-z])[0-9A-Za-z!@#$%]{6,12}$/', $password)) {
         return 'The password does not meet the requirements!';
     } elseif ($password !== $confirmPassword) {
         return "Password confirmation does not match!";
@@ -44,10 +44,9 @@ function validateUsername($username, $login)
 function signup($login, $password, $username, $image)
 {
     require 'connection.php';
-    $ipAddress = $_SERVER['REMOTE_ADDR'];
 
     try {
-        $queryLogin = $pdoChat->prepare("SELECT * FROM user WHERE login = :login");
+        $queryLogin = $pdoChat->prepare("SELECT * FROM users WHERE login = :login");
         $queryLogin->execute([':login' => $login]);
         $fetchedLogin = $queryLogin->fetchAll();
     } catch (PDOException $exception) {
@@ -57,7 +56,7 @@ function signup($login, $password, $username, $image)
     }
 
     try {
-        $queryUsername = $pdoChat->prepare("SELECT * FROM user WHERE username = :username");
+        $queryUsername = $pdoChat->prepare("SELECT * FROM users WHERE username = :username");
         $queryUsername->execute([':username' => $username]);
         $fetchedUsername = $queryUsername->fetchAll();
     } catch (PDOException $exception) {
@@ -66,21 +65,11 @@ function signup($login, $password, $username, $image)
         exit();
     }
 
-    try {
-        $queryIpAddress = $pdoChat->prepare("SELECT * FROM computer WHERE ipAddress = :ipAddress");
-        $queryIpAddress->execute([':ipAddress' => $ipAddress]);
-        $fetchedIpAddress = $queryIpAddress->fetchAll();
-    } catch (PDOException $exception) {
-        $_SESSION['lastErrMsg'] = $exception->getMessage();
-        header('Location: ../signup.php?err=signupIpFetch');
-        exit();
-    }
-
-    if (empty($fetchedLogin) && empty($fetchedUsername) && empty($fetchedIpAddress)) {
+    if (empty($fetchedLogin) && empty($fetchedUsername)) {
         $passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
         try {
-            $prepareSignup = $pdoChat->prepare("INSERT INTO user (username, login, password, pfpLink) VALUES (:username, :login, :password, :image)");
+            $prepareSignup = $pdoChat->prepare("INSERT INTO users (username, login, password, pfpLink) VALUES (:username, :login, :password, :image)");
             $prepareSignup->execute([
                 ':username' => $username,
                 ':login' => $login,
@@ -94,7 +83,7 @@ function signup($login, $password, $username, $image)
         }
 
         try {
-            $pdoGetIdForLogIn = $pdoChat->prepare("SELECT * FROM user WHERE login = :login");
+            $pdoGetIdForLogIn = $pdoChat->prepare("SELECT * FROM users WHERE login = :login");
             $pdoGetIdForLogIn->execute([':login' => $login]);
             $fetchGetIdForLogIn = $pdoGetIdForLogIn->fetch();
         } catch (PDOException $exception) {
@@ -102,6 +91,7 @@ function signup($login, $password, $username, $image)
             header('Location: ../index.php?err=loginFetch');
             exit();
         }
+
         $_SESSION['idUserConnected'] = $fetchGetIdForLogIn;
         header("Location: ../user-connected.php");
         exit();
@@ -111,9 +101,6 @@ function signup($login, $password, $username, $image)
         }
         if (!empty($fetchedUsername)) {
             $_SESSION['usernameAlreadyInUse'] = true;
-        }
-        if (!empty($fetchedIpAddress)) {
-            $_SESSION['ipAlreadyInUse'] = true;
         }
         header('Location: ../signup.php?err=signupAlreadyInUse');
         exit();
