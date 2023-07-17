@@ -1,4 +1,11 @@
-<?php session_start() ?>
+<?php
+session_start();
+if (isset($_SESSION['id'])) {
+    header('Location: profil.php');
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,7 +31,7 @@
         </form>
         <a href="signup.php"><button>Sign up</button></a>
     </div>
-    <?=$_SERVER["REMOTE_ADDR"] ?>
+    <?= $_SERVER["REMOTE_ADDR"] ?>
     <pre>
 <?= var_dump($_SESSION) ?>
 </pre>
