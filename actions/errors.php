@@ -14,16 +14,10 @@ if ($_GET['err']) {
         case 'password':
             # code...
             break;
-        case 'ipAdressDoesNotMatch':
-            # code...
-            break;
         case 'signupLoginFetch':
             # code...
             break;
         case 'signupUsernameFetch':
-            # code...
-            break;
-        case 'signupIpFetch':
             # code...
             break;
         case 'pdoSignupErr':
@@ -38,7 +32,7 @@ if ($_GET['err']) {
         case 'signupAlreadyInUse':
             # code...
             break;
-        case 'null':
+        case 'SignUpFailedUserLoggedIn':
             # code...
             break;
         case 'null':
