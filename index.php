@@ -102,7 +102,7 @@ if (isset($_SESSION['id'])) {
 
 
 
-<script src="assets/js/main.js"></script> 
+<script src="assets/js/index.js"></script> 
 </body>
 </html>
 
