@@ -1,7 +1,7 @@
 <?php
 session_start();
-if (isset($_SESSION['id'])) {
-    header('Location: profil.php');
+if (isset($_SESSION['idUser'])) {
+    header('Location: profile.php?info=userLoggedIn');
     exit();
 }
 ?>
