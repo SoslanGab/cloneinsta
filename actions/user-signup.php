@@ -129,7 +129,7 @@ if ($loginErr || $passwordErr || $usernameErr) {
 
 if ($imgUploadError === UPLOAD_ERR_OK) {
     $fileExtension = pathinfo($_FILES['uploadProfileImage']['name'], PATHINFO_EXTENSION);
-    $imgDestinationPath = "./uploads/{$username}.{$fileExtension}";
+    $imgDestinationPath = "../uploads/{$username}.{$fileExtension}";
     move_uploaded_file($_FILES['uploadProfileImage']['tmp_name'], $imgDestinationPath);
 } elseif ($imgUploadError !== UPLOAD_ERR_NO_FILE) {
     $errorCode = $_FILES['uploadProfileImage']['error'];
