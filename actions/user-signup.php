@@ -92,8 +92,10 @@ function signup($login, $password, $username, $image)
             exit();
         }
 
-        $_SESSION['idUserConnected'] = $fetchGetIdForLogIn;
-        header("Location: ../user-connected.php");
+        $_SESSION['idUser'] = $fetchGetIdForLogIn['id'];
+        $_SESSION['username'] = $fetchGetIdForLogIn['username'];
+        $_SESSION['pfpLink'] = $fetchGetIdForLogIn['pfpLink'];
+        header("Location: ../profile.php");
         exit();
     } else {
         if (!empty($fetchedLogin)) {
