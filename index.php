@@ -19,7 +19,7 @@ if (isset($_SESSION['idUser'])) {
 <body>
 
     <section class="forms-section">
-        <h1 class="section-title">Animated Forms</h1>
+        <h1 class="section-title">Insta from Aliexpress</h1>
         <div class="forms">
             <div class="form-wrapper is-active">
                 <button type="button" class="switcher switcher-login">
@@ -88,8 +88,6 @@ if (isset($_SESSION['idUser'])) {
 
 
     <div>
-
-        <a href="signup.php"><button>Sign up</button></a>
     </div>
     <pre>
 <?= var_dump($_SESSION) ?>
