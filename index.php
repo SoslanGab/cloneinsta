@@ -22,45 +22,60 @@ if (isset($_SESSION['idUser'])) {
         <h1 class="section-title">Animated Forms</h1>
         <div class="forms">
             <div class="form-wrapper is-active">
-            <button type="button" class="switcher switcher-login">
-                Login
-                <span class="underline"></span>
-            </button>
-            <form class="form form-login">
-                <fieldset>
-                <legend>Please, enter your email and password for login.</legend>
-                <div class="input-block">
-                    <label for="login-email">E-mail</label>
-                    <input id="login-email" type="email" required>
-                </div>
-                <div class="input-block">
-                    <label for="login-password">Password</label>
-                    <input id="login-password" type="password" required>
-                </div>
-                </fieldset>
-                <button type="submit" class="btn-login">Login</button>
-            </form>
+                <button type="button" class="switcher switcher-login">
+                    Login
+                    <span class="underline"></span>
+                </button>
+                <form action="actions/user-login.php" method="post" class="form form-login">
+                    <fieldset>
+                    <legend>Merci de rentrer votre login</legend>
+                    <div class="input-block">
+                        <label for="login-email">Login</label>
+                        <input id="login-email"  type="text" name="login" required="required" <?php if (isset($_COOKIE['login'])) {
+                                                                    echo "value=\"{$_COOKIE['login']}\"";
+                                                                } ?>>
+                    </div>
+                    <div class="input-block">
+                        <label for="password">Password</label>
+                        <input type="password" name="password" required="required">
+                    </div>
+                    <div class="">
+                        <input type="checkbox" name="rememberMe" checked>Remember me</input>
+                        <input type="checkbox" name="stayLoggedIn">Stay logged in</input>
+                    </div>
+                    </fieldset>
+                    <button type="submit" class="btn-login">Login</button>
+                </form>
             </div>
             <div class="form-wrapper">
             <button type="button" class="switcher switcher-signup">
                 Sign Up
                 <span class="underline"></span>
             </button>
-            <form class="form form-signup">
+            <form action="actions/user-signup.php" method="POST" enctype="multipart/form-data" id="signupForm" class="form form-signup">
                 <fieldset>
-                <legend>Please, enter your email, password and password confirmation for sign up.</legend>
-                <div class="input-block">
-                    <label for="signup-email">E-mail</label>
-                    <input id="signup-email" type="email" required>
-                </div>
-                <div class="input-block">
-                    <label for="signup-password">Password</label>
-                    <input id="signup-password" type="password" required>
-                </div>
-                <div class="input-block">
-                    <label for="signup-password-confirm">Confirm password</label>
-                    <input id="signup-password-confirm" type="password" required>
-                </div>
+                    <legend>Veuillez remplir ce formulaire pour pouvoir vous inscrire</legend>
+                    <div class="input-block">
+                        <label for="createUsername">Username :</label>
+                        <input type="text" name="createUsername" required>                                          
+                    </div>
+                    <div class="input-block">
+                        <label for="signup-email">Login</label>
+                        <input type="text" name="createLogin"  id="signup-email" required>
+                    </div>
+                    <div class="input-block">
+                        <label for="signup-password">Password</label>
+                        <input type="password" name="createPassword" required>
+                    </div>
+                    <div class="input-block">
+                        <label for="signup-password-confirm">Confirm password</label>
+                        <input type="password" name="confirmPassword" required>
+                    </div>
+                    <div class="input-block">
+                    <label for="uploadProfileImage">Profile picture :</label>
+                        <input type="hidden" name="MAX_FILE_SIZE" value="3000000">
+                        <input type="file" name="uploadProfileImage" accept="image/*">
+                    </div>
                 </fieldset>
                 <button type="submit" class="btn-signup">Continue</button>
             </form>
@@ -73,17 +88,7 @@ if (isset($_SESSION['idUser'])) {
 
 
     <div>
-        <form action="actions/user-login.php" method="post">
-            <label for="login">Login:</label>
-            <input type="text" name="login" required="required" <?php if (isset($_COOKIE['login'])) {
-                                                                    echo "value=\"{$_COOKIE['login']}\"";
-                                                                } ?>>
-            <label for="login">Password:</label>
-            <input type="password" name="password" required="required">
-            <input type="checkbox" name="rememberMe" checked>Remember me</input>
-            <input type="checkbox" name="stayLoggedIn">Stay logged in</input>
-            <button type="submit">Log in</button>
-        </form>
+
         <a href="signup.php"><button>Sign up</button></a>
     </div>
     <?= $_SERVER["REMOTE_ADDR"] ?>
