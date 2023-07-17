@@ -91,7 +91,6 @@ if (isset($_SESSION['idUser'])) {
 
         <a href="signup.php"><button>Sign up</button></a>
     </div>
-    <?= $_SERVER["REMOTE_ADDR"] ?>
     <pre>
 <?= var_dump($_SESSION) ?>
 </pre>
