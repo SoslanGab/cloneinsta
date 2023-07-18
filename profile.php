@@ -25,12 +25,7 @@
 						</nav>
 						<nav class="main">
 							<ul>
-								<li class="search">
-									<a class="fa-search" href="#search">Search</a>
-									<form id="search" method="get" action="#">
-										<input type="text" name="query" placeholder="Search" />
-									</form>
-								</li>
+
 								<li class="menu">
 									<a class="fa-bars" href="#menu">Menu</a>
 								</li>
@@ -40,13 +35,6 @@
 
 				<!-- Menu -->
 					<section id="menu">
-
-						<!-- Search -->
-							<section>
-								<form class="search" method="get" action="#">
-									<input type="text" name="query" placeholder="Search" />
-								</form>
-							</section>
 
 						<!-- Links -->
 							<section>
@@ -81,7 +69,9 @@
 						<!-- Actions -->
 							<section>
 								<ul class="actions stacked">
-									<li><a href="#" class="button large fit">Log In</a></li>
+
+									<li><a href="actions/user-logout.php" class="button large fit">Log out</a></li>
+
 								</ul>
 							</section>
 
