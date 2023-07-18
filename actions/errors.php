@@ -35,7 +35,7 @@ if ($_GET['err']) {
         case 'SignUpFailedUserLoggedIn':
             # code...
             break;
-        case 'null':
+        case 'postCommentFailed':
             # code...
             break;
         case 'null':
