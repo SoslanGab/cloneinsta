@@ -25,6 +25,7 @@
 						</nav>
 						<nav class="main">
 							<ul>
+
 								<li class="menu">
 									<a class="fa-bars" href="#menu">Menu</a>
 								</li>
@@ -34,6 +35,7 @@
 
 				<!-- Menu -->
 					<section id="menu">
+
 						<!-- Links -->
 							<section>
 								<ul class="links">
@@ -67,7 +69,9 @@
 						<!-- Actions -->
 							<section>
 								<ul class="actions stacked">
+
 									<li><a href="actions/user-logout.php" class="button large fit">Log out</a></li>
+
 								</ul>
 							</section>
 
