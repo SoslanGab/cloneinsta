@@ -21,6 +21,6 @@ try {
     echo json_encode("success");
 } catch (PDOException $exception) {
     $_SESSION['lastErrMsg'] = $exception->getMessage();
-    header('Location: ../index.php?err=postCommentFailed');
+    header('Location: ../profile.php?err=postCommentFailed');
     exit();
 }
