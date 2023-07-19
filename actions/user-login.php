@@ -12,19 +12,11 @@ if (isset($_POST['rememberMe']) && !isset($_COOKIE['login'])) {
 }
 
 
-if (isset($_POST['stayLoggedIn'])) {
-    setcookie('stayLoggedIn', true);
-} else {
-    setcookie('stayLoggedIn', false);
-    setcookie('id', false);
-    setcookie('username', false);
-    setcookie('pfpLink', false);
-}
-
-
 require 'connection.php';
 
+
 $login = htmlspecialchars(strtolower($_POST['login']));
+
 
 try {
     $queryUsers = $pdoInsta->prepare("SELECT * FROM users WHERE users.login = :login");
@@ -48,10 +40,16 @@ function login(array $fetch, string $password)
         $_SESSION['idUser'] = $fetch['id'];
         $_SESSION['username'] = $fetch['username'];
         $_SESSION['pfpLink'] = $fetch['pfpLink'];
-        if(isset($_COOKIE['stayLoggedIn'])){
+        if (isset($_POST['stayLoggedIn'])) {
+            setcookie('stayLoggedIn', true);
             setcookie('id', $fetch['id']);
             setcookie('username', $fetch['username']);
             setcookie('pfpLink', $fetch['pfpLink']);
+        } else {
+            setcookie('stayLoggedIn', false);
+            setcookie('id', false);
+            setcookie('username', false);
+            setcookie('pfpLink', false);
         }
         header('Location: ../profile.php?info=loginSuccess');
         exit();
