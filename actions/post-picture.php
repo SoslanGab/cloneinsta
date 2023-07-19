@@ -1,7 +1,14 @@
 <?php
 
+session_start();
+
+
+$title = $_POST['title'];
+$text = $_POST['text'];
 $posterId = $_SESSION['idUser'];
 $imgUploadError = $_FILES['uploadPicture']['error'];
+
+postPicture($posterId, $imgDestinationPath, $title, $text);
 
 
 if ($imgUploadError === UPLOAD_ERR_OK) {
