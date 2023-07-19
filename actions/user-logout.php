@@ -1,10 +1,10 @@
 <?php
 
 session_start();
-setcookie('stayLoggedIn', false);
-setcookie('id', false);
-setcookie('username', false);
-setcookie('pfpLink', false);
+setcookie('stayLoggedIn', false, -1, '/');
+setcookie('id', false, -1, '/');
+setcookie('username', false, -1, '/');
+setcookie('pfpLink', false, -1, '/');
 session_destroy();
 
 header ("Location: ../index.php");
