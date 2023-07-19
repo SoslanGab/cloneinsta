@@ -38,7 +38,7 @@ if ($_GET['err']) {
         case 'postCommentFailed':
             # code...
             break;
-        case 'null':
+        case 'postPictureFailed':
             # code...
             break;
         case 'null':
