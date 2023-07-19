@@ -41,15 +41,15 @@ function login(array $fetch, string $password)
         $_SESSION['username'] = $fetch['username'];
         $_SESSION['pfpLink'] = $fetch['pfpLink'];
         if (isset($_POST['stayLoggedIn'])) {
-            setcookie('stayLoggedIn', true);
-            setcookie('id', $fetch['id']);
-            setcookie('username', $fetch['username']);
-            setcookie('pfpLink', $fetch['pfpLink']);
+            setcookie('stayLoggedIn', true, time() + 86400 * 365, "/");
+            setcookie('id', $fetch['id'], time() + 86400 * 365, "/");
+            setcookie('username', $fetch['username'], time() + 86400 * 365, "/");
+            setcookie('pfpLink', $fetch['pfpLink'], time() + 86400 * 365, "/");
         } else {
-            setcookie('stayLoggedIn', false);
-            setcookie('id', false);
-            setcookie('username', false);
-            setcookie('pfpLink', false);
+            setcookie('stayLoggedIn', false, -1, '/');
+            setcookie('id', false, -1, '/');
+            setcookie('username', false, -1, '/');
+            setcookie('pfpLink', false, -1, '/');
         }
         header('Location: ../profile.php?info=loginSuccess');
         exit();
