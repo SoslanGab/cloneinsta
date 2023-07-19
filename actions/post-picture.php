@@ -8,12 +8,13 @@ $text = $_POST['text'];
 $posterId = $_SESSION['idUser'];
 $imgUploadError = $_FILES['uploadPicture']['error'];
 
-postPicture($posterId, $imgDestinationPath, $title, $text);
+postPicture($posterId, $imgPath, $title, $text);
 
 
 if ($imgUploadError === UPLOAD_ERR_OK) {
     $fileExtension = pathinfo($_FILES['uploadPicture']['name'], PATHINFO_EXTENSION);
     $imgDestinationPath = "../uploads/{$username}.{$fileExtension}";
+    $imgPath = "uploads/{$username}.{$fileExtension}";
     move_uploaded_file($_FILES['uploadPicture']['tmp_name'], $imgDestinationPath);
 } elseif ($imgUploadError !== UPLOAD_ERR_OK) {
     $errorCode = $_FILES['uploadPicture']['error'];

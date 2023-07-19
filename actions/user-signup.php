@@ -132,6 +132,7 @@ if ($loginErr || $passwordErr || $usernameErr) {
 if ($imgUploadError === UPLOAD_ERR_OK) {
     $fileExtension = pathinfo($_FILES['uploadProfileImage']['name'], PATHINFO_EXTENSION);
     $imgDestinationPath = "../uploads/{$username}.{$fileExtension}";
+    $imgPath = "uploads/{$username}.{$fileExtension}";
     move_uploaded_file($_FILES['uploadProfileImage']['tmp_name'], $imgDestinationPath);
 } elseif ($imgUploadError !== UPLOAD_ERR_NO_FILE) {
     $errorCode = $_FILES['uploadProfileImage']['error'];
@@ -150,8 +151,8 @@ if ($imgUploadError === UPLOAD_ERR_OK) {
     }
 }
 
-if (isset($login) && isset($password) && isset($username) && isset($imgDestinationPath) && !isset($_SESSION['signupErr'])) {
-    signup($login, $password, $username, $imgDestinationPath);
+if (isset($login) && isset($password) && isset($username) && isset($imgPath) && !isset($_SESSION['signupErr'])) {
+    signup($login, $password, $username, $imgPath);
 } else {
     echo "Something went wrong!";
     echo $_SESSION['signupErr'];
