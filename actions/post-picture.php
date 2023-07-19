@@ -6,15 +6,15 @@ session_start();
 $title = $_POST['title'];
 $text = $_POST['text'];
 $posterId = $_SESSION['idUser'];
+$username = $_SESSION['username'];
+$uniqueKey = random_int(1, 999);
 $imgUploadError = $_FILES['uploadPicture']['error'];
-
-postPicture($posterId, $imgPath, $title, $text);
 
 
 if ($imgUploadError === UPLOAD_ERR_OK) {
     $fileExtension = pathinfo($_FILES['uploadPicture']['name'], PATHINFO_EXTENSION);
     $imgDestinationPath = "../uploads/{$username}.{$fileExtension}";
-    $imgPath = "uploads/{$username}.{$fileExtension}";
+    $imgPath = "uploads/{$username}{$uniqueKey}.{$fileExtension}";
     move_uploaded_file($_FILES['uploadPicture']['tmp_name'], $imgDestinationPath);
 } elseif ($imgUploadError !== UPLOAD_ERR_OK) {
     $errorCode = $_FILES['uploadPicture']['error'];
@@ -58,3 +58,6 @@ function postPicture($posterId, string $imgPath, string $title, string $text)
         exit();
     }
 }
+
+
+postPicture($posterId, $imgPath, $title, $text);
