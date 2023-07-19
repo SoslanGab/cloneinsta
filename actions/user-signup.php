@@ -46,7 +46,7 @@ function signup($login, $password, $username, $image)
     require 'connection.php';
 
     try {
-        $queryLogin = $pdoChat->prepare("SELECT * FROM users WHERE login = :login");
+        $queryLogin = $pdoInsta->prepare("SELECT * FROM users WHERE login = :login");
         $queryLogin->execute([':login' => $login]);
         $fetchedLogin = $queryLogin->fetchAll();
     } catch (PDOException $exception) {
@@ -56,7 +56,7 @@ function signup($login, $password, $username, $image)
     }
 
     try {
-        $queryUsername = $pdoChat->prepare("SELECT * FROM users WHERE username = :username");
+        $queryUsername = $pdoInsta->prepare("SELECT * FROM users WHERE username = :username");
         $queryUsername->execute([':username' => $username]);
         $fetchedUsername = $queryUsername->fetchAll();
     } catch (PDOException $exception) {
@@ -69,7 +69,7 @@ function signup($login, $password, $username, $image)
         $passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
         try {
-            $prepareSignup = $pdoChat->prepare("INSERT INTO users (username, login, password, pfpLink) VALUES (:username, :login, :password, :image)");
+            $prepareSignup = $pdoInsta->prepare("INSERT INTO users (username, login, password, pfpLink) VALUES (:username, :login, :password, :image)");
             $prepareSignup->execute([
                 ':username' => $username,
                 ':login' => $login,
@@ -83,7 +83,7 @@ function signup($login, $password, $username, $image)
         }
 
         try {
-            $pdoGetIdForLogIn = $pdoChat->prepare("SELECT * FROM users WHERE login = :login");
+            $pdoGetIdForLogIn = $pdoInsta->prepare("SELECT * FROM users WHERE login = :login");
             $pdoGetIdForLogIn->execute([':login' => $login]);
             $fetchGetIdForLogIn = $pdoGetIdForLogIn->fetch();
         } catch (PDOException $exception) {

@@ -24,7 +24,7 @@ require 'connection.php';
 $login = htmlspecialchars(strtolower($_POST['login']));
 
 try {
-    $queryUsers = $pdoChat->prepare("SELECT * FROM users WHERE users.login = :login");
+    $queryUsers = $pdoInsta->prepare("SELECT * FROM users WHERE users.login = :login");
     $queryUsers->execute([':login' => $login]);
     $fetchedUser = $queryUsers->fetchAll();
 } catch (PDOException $exception) {
