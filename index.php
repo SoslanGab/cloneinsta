@@ -3,6 +3,12 @@ session_start();
 if (isset($_SESSION['idUser'])) {
     header('Location: profile.php?info=userLoggedIn');
     exit();
+} else if(isset($_COOKIE['stayLoggedIn'])){
+    $_SESSION['idUser'] = $_COOKIE['id'];
+    $_SESSION['username'] = $_COOKIE['username'];
+    $_SESSION['pfpLink'] = $_COOKIE['pfpLink'];
+    header('Location: profile.php?info=userAutoLoggedIn');
+    exit();
 }
 ?>
 
@@ -19,7 +25,7 @@ if (isset($_SESSION['idUser'])) {
 <body>
 
     <section class="forms-section">
-        <h1 class="section-title">Insta from Aliexpress</h1>
+        <h1 class="section-title">Aligram</h1>
         <div class="forms">
             <div class="form-wrapper is-active">
                 <button type="button" class="switcher switcher-login">
