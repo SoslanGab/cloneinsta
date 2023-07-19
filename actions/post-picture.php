@@ -13,7 +13,7 @@ $imgUploadError = $_FILES['uploadPicture']['error'];
 
 if ($imgUploadError === UPLOAD_ERR_OK) {
     $fileExtension = pathinfo($_FILES['uploadPicture']['name'], PATHINFO_EXTENSION);
-    $imgDestinationPath = "../uploads/{$username}.{$fileExtension}";
+    $imgDestinationPath = "../uploads/{$username}{$uniqueKey}.{$fileExtension}";
     $imgPath = "uploads/{$username}{$uniqueKey}.{$fileExtension}";
     move_uploaded_file($_FILES['uploadPicture']['tmp_name'], $imgDestinationPath);
 } elseif ($imgUploadError !== UPLOAD_ERR_OK) {
@@ -50,7 +50,7 @@ function postPicture($posterId, string $imgPath, string $title, string $text)
             ':img_text' => $text,
             ':poster_id' => $posterId
         ]);
-        echo json_encode("imgUploadSuccess");
+        header('Location: ../profile.php?info=pictureUploadSuccess');
         exit();
     } catch (PDOException $exception) {
         $_SESSION['lastErrMsg'] = $exception->getMessage();
