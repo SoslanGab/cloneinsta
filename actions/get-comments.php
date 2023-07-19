@@ -6,7 +6,7 @@ $pictureId = $data['pictureId'];
 require 'connexion.php';
 
 try {
-    $prepareGetComment = $pdoChat->prepare("SELECT * FROM comments WHERE picutre_id = :picutre_id");
+    $prepareGetComment = $pdoInsta ->prepare("SELECT * FROM comments WHERE picutre_id = :picutre_id");
     $prepareGetComment->execute([':picutre_id' => $pictureId]);
     $fetchedComment = $prepareGetComment->fetchAll();
 } catch (PDOException $exception) {

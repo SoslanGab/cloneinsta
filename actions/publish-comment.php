@@ -12,7 +12,7 @@ require 'connection.php';
 
 
 try {
-    $prepareInsertComment = $pdoChat->prepare("INSERT INTO comments (content, poster_id, picture_id) VALUES (:content, :poster_id, :picture_id)");
+    $prepareInsertComment = $pdoInsta->prepare("INSERT INTO comments (content, poster_id, picture_id) VALUES (:content, :poster_id, :picture_id)");
     $prepareInsertComment->execute([
         ':content' => $content,
         ':poster_id' => $posterId,
@@ -21,7 +21,6 @@ try {
     echo json_encode("success");
 } catch (PDOException $exception) {
     $_SESSION['lastErrMsg'] = $exception->getMessage();
-    echo json_encode("failed");
     header('Location: ../index.php?err=postCommentFailed');
     exit();
 }
