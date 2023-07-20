@@ -19,7 +19,7 @@ function validatePassword($password, $confirmPassword)
 {
     if (empty($password)) {
         return "Password is required.";
-    } elseif (!preg_match('/^(?=.*\d)(?=.*[A-Za-z])[0-9A-Za-z!@#$%]{6,12}$/', $password)) {
+    } elseif (!preg_match('/^(?=.*\d)(?=.*[A-Za-z])(?=.*[^0-9A-Za-z])[0-9A-Za-z!@#$%]{6,12}$/', $password)) {
         return 'The password does not meet the requirements!';
     } elseif ($password !== $confirmPassword) {
         return "Password confirmation does not match!";

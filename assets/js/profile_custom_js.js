@@ -25,6 +25,7 @@ likeBtns.forEach(element => {
               // Par exemple, vous pouvez mettre à jour l'interface utilisateur en fonction de la réponse.
               console.log(data);
             } else {
+              console.log(data);
               console.error("La réponse n'est pas un objet JSON valide.");
             }
           } catch (error) {
