@@ -61,15 +61,7 @@ HTML;
 		<!-- Sidebar -->
 		<section id="sidebar">
 
-			<!-- Intro -->
-			<section id="intro">
-				<a href="#" class="logo"><img src="images/logo.jpg" alt="" /></a>
-				<header>
-					<h2>Future Imperfect</h2>
-					<p>Another fine responsive site template by <a href="http://html5up.net">HTML5 UP</a></p>
-				</header>
-			</section>
-
+			
 			<!-- Mini Posts -->
 			<section>
 				<div class="mini-posts">
@@ -183,6 +175,8 @@ HTML;
 
 	</div>
 
+
+</body>
 	<!-- Scripts -->
 	<script src="assets/js/jquery.min.js"></script>
 	<script src="assets/js/browser.min.js"></script>
@@ -190,8 +184,4 @@ HTML;
 	<script src="assets/js/util.js"></script>
 	<script src="assets/js/main.js"></script>
 	<script src="assets/js/profile_custom_js.js"></script>
-
-
-</body>
-
 </html>
