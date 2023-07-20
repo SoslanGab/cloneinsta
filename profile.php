@@ -1,18 +1,8 @@
-<!DOCTYPE HTML>
-<html>
-
-<head>
-	<title>CloneInstagram</title>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-	<link rel="stylesheet" href="assets/css/main.css" />
-</head>
+<?php include "header.php"; ?>
 
 <body class="is-preload">
-
 	<!-- Wrapper -->
 	<div id="wrapper">
-		<?php include "header.php"; ?>
 
 		<!-- Main -->
 		<div id="main">
@@ -24,7 +14,7 @@
 			foreach ($fetchedPictures as $pic) {
 				echo <<<HTML
     <article class="post">
-    <header>
+    <section class="section1">
         <div class="title">
             <h2><a href="user_profile.php?id={$pic['id']}">{$pic['img_title']}</a></h2>
         </div>
@@ -32,19 +22,42 @@
             <time class="published" datetime="2015-11-01">{$pic['timedate']}</time>
             <a href="user_profile.php?id={$pic['id']}" class="author"><span class="name">{$pic['username']}</span><img src="../{$pic['pfpLink']}" alt="" /></a>
         </div>
-    </header>
+    </section>
     <a href="user_profile.php?id={$pic['id']}" class="image featured"><img src="{$pic['picture_link']}" alt="" /></a>
     <p>{$pic['img_text']}</p>
-    <footer>
-        <ul class="actions">
-            <li><a href="commentaire.php" class="button large">Ajouter un commentaire</a></li>
-        </ul>
+    <section class="section2">
+        <div class="actions">
+			<!-- Popup -->
+			<button type="button" class="button large" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">Ajouter un commentaire</button>
+
+			<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title mx-auto" id="exampleModalLabel">Ajouter un commentaire</h5>
+						</div>
+						<div class="modal-body">
+							<form action="actions/post-comment.php" method="POST" enctype="multipart/form-data">
+								<div class="form-group">
+									<label for="message-text" class="col-form-label">Message:</label>
+									<textarea class="form-control" id="message-text"></textarea>
+								</div>
+							</form>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="button" data-dismiss="modal">Fermer</button>
+							<button type="submit" class="button">Envoyer le commentaire</button>
+						</div>
+					</div>
+				</div>
+			</div>
+        </div>
         <ul class="stats">
             <li><a href="#">General</a></li>
             <li><a href="#" class="icon solid fa-heart" id="like{$pic['pic_id']}" onclick="likePost({$pic['pic_id']})">28</a></li>
             <li><a href="#" class="icon solid fa-comment">128</a></li>
         </ul>
-    </footer>
+	</section>
 </article>
 HTML;
 			}
@@ -57,6 +70,7 @@ HTML;
 			</ul>
 
 		</div>
+
 
 		<!-- Sidebar -->
 		<section id="sidebar">
@@ -174,14 +188,3 @@ HTML;
 		</section>
 
 	</div>
-
-
-</body>
-	<!-- Scripts -->
-	<script src="assets/js/jquery.min.js"></script>
-	<script src="assets/js/browser.min.js"></script>
-	<script src="assets/js/breakpoints.min.js"></script>
-	<script src="assets/js/util.js"></script>
-	<script src="assets/js/main.js"></script>
-	<script src="assets/js/profile_custom_js.js"></script>
-</html>

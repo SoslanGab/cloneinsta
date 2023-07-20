@@ -96,3 +96,27 @@
 			});
 
 })(jQuery);
+
+// POP UP 
+function showPopup() {
+	var popup = document.getElementById('myPopup');
+	popup.style.display = 'block';
+  }
+  
+  function hidePopup() {
+	var popup = document.getElementById('myPopup');
+	popup.style.display = 'none';
+  }
+  
+  function sendComment() {
+	var commentTextarea = document.getElementById('commentTextarea');
+	var comment = commentTextarea.value;
+  
+	// Ici, vous pouvez gérer les données du commentaire, par exemple les envoyer à un serveur ou les traiter selon vos besoins.
+  
+	// Fermer la popup après avoir envoyé le commentaire
+	hidePopup();
+  }
+  
+  
+  
