@@ -2,9 +2,8 @@
 
 session_start();
 
-$data = json_decode(file_get_contents('php://input'), true);
-$content = htmlspecialchars($data['commentConent']);
-$pictureId = $data['pictureId'];
+$content = htmlspecialchars($_POST['commentConent']);
+$pictureId = $_POST['pictureId'];
 $posterId = $_SESSION['idUser'];
 
 
@@ -16,9 +15,8 @@ try {
     $prepareInsertComment->execute([
         ':content' => $content,
         ':poster_id' => $posterId,
-        ':picture_id' => $pictureId,
+        ':picutre_id' => $pictureId
     ]);
-    echo json_encode("success");
 } catch (PDOException $exception) {
     $_SESSION['lastErrMsg'] = $exception->getMessage();
     header('Location: ../profile.php?err=postCommentFailed');
