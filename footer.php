@@ -7,5 +7,5 @@
         <li><a href="#" class="icon solid fa-rss"><span class="label">RSS</span></a></li>
         <li><a href="#" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
     </ul>
-    <p class="copyright">&copy; Untitled. Design: <a href="http://html5up.net">HTML5 UP</a>. Images: <a href="http://unsplash.com">Unsplash</a>.</p>
+    <p class="copyright">&copy; copyright <a href="http://html5up.net">soslan</a> <a href="http://unsplash.com">evgenii</a>.</p>
 </section>
