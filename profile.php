@@ -34,6 +34,10 @@ if (!isset($_SESSION['idUser'])) {
 					};
 				};
 				$c = 0;
+				foreach ($fetchedComments as $comment) {
+					if ($comment['picture_id'] == $pic['pic_id']) {
+						$c++;
+					}};
 				echo <<<HTML
     <article class="post">
 		<section class="section1">
@@ -88,7 +92,6 @@ if (!isset($_SESSION['idUser'])) {
 HTML;
 				foreach ($fetchedComments as $comment) {
 					if ($comment['picture_id'] == $pic['pic_id']) {
-						$c++;
 						echo <<<HTML
     <div class="comments col-12 border">
      <div class="pic-date">
