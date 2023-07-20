@@ -16,12 +16,12 @@ function verifyIfAlreadyLiked($pictureId, $posterId)
     require 'connection.php';
 
     try {
-        $prepareLike = $pdoInsta->prepare("SELECT * FROM comments WHERE picture_id = :picture_id AND poster_id = :poster_id");
+        $prepareLike = $pdoInsta->prepare("SELECT * FROM likes WHERE picture_id = :picture_id AND poster_id = :poster_id");
         $prepareLike->execute([
             ':picture_id' => $pictureId,
             ':poster_id' => $posterId
         ]);
-        $fetchedLike = $queryUsername->fetch();
+        $fetchedLike = $prepareLike->fetchAll();
     } catch (PDOException $exception) {
         $_SESSION['lastErrMsg'] = $exception->getMessage();
         header('Location: ../signup.php?err=signupUsernameFetch');
@@ -78,9 +78,9 @@ function removeLike($pictureId, $posterId)
 function like($pictureId, $posterId, $verification)
 {
 
-    if ($verification !== null) {
+    if ($verification !== []) {
         removeLike($pictureId, $posterId);
-    } elseif ($verification === null) {
+    } elseif ($verification === []) {
         postLike($pictureId, $posterId);
     } else {
         echo "something went wrong!";
