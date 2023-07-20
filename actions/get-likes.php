@@ -11,5 +11,3 @@ try {
     header('Location: ../profile.php?err=getLikesFailed');
     exit();
 }
-
-echo json_encode($fetchedLikes);
