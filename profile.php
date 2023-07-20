@@ -1,5 +1,9 @@
 <?php
 session_start();
+if (!isset($_SESSION['idUser'])) {
+    header('Location: index.php?err=userNotLoggedIn');
+    exit();
+} 
 ?>
 <?php include "header.php"; ?>
 
@@ -44,9 +48,9 @@ session_start();
     <section class="section2">
         <div class="actions">
 			<!-- Popup -->
-			<button type="button" class="button large" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">Ajouter un commentaire</button>
+			<button type="button" class="button large" data-toggle="modal" data-target="#exampleModal{$pic['pic_id']}" data-whatever="@getbootstrap">Ajouter un commentaire</button>
 
-			<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal fade" id="exampleModal{$pic['pic_id']}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 				<div class="modal-dialog" role="document">
 					<div class="modal-content">
 						<div class="modal-header">
@@ -56,14 +60,16 @@ session_start();
 							<form action="actions/post-comment.php" method="POST" enctype="multipart/form-data">
 								<div class="form-group">
 									<label for="message-text" class="col-form-label">Message:</label>
-									<textarea class="form-control" id="message-text"></textarea>
+									<textarea class="form-control" id="message-text" name ="commentConent"></textarea>
+									<input type="number" name="pictureId" value="{$pic['pic_id']}" hidden>
 								</div>
-							</form>
+							
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="button" data-dismiss="modal">Fermer</button>
 							<button type="submit" class="button">Envoyer le commentaire</button>
 						</div>
+						</form>
 					</div>
 				</div>
 			</div>
