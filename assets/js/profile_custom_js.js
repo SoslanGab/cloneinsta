@@ -39,4 +39,8 @@ likeBtns.forEach(element => {
 // }
 
 
-document.querySelector(".fa-commen")
+function showCommentList(picId){
+    let commentDiv = document.querySelector(`#commentList${picId}`);
+    commentDiv.hidden = false;
+
+}
