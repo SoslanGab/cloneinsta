@@ -1,9 +1,9 @@
 <?php
 session_start();
 if (!isset($_SESSION['idUser'])) {
-    header('Location: index.php?err=userNotLoggedIn');
-    exit();
-} 
+	header('Location: index.php?err=userNotLoggedIn');
+	exit();
+}
 ?>
 <?php include "header.php"; ?>
 
@@ -18,7 +18,8 @@ if (!isset($_SESSION['idUser'])) {
 			<?php
 			include_once "actions/get-pictures.php";
 			include_once "actions/get-likes.php";
-			
+			include_once "actions/get-comments.php";
+
 			foreach ($fetchedPictures as $pic) {
 				$style = 'style=""';
 				$i = 0;
@@ -32,6 +33,7 @@ if (!isset($_SESSION['idUser'])) {
 						}
 					};
 				};
+				$c = 0;
 				echo <<<HTML
     <article class="post">
 		<section class="section1">
@@ -77,21 +79,30 @@ if (!isset($_SESSION['idUser'])) {
 			<ul class="stats">
 				<li><a href="#">General</a></li>
 				<li><a class="icon solid fa-heart" id="like{$pic['pic_id']}" {$style}>{$i}</a></li>
-				<li><a href="#" class="icon solid fa-comment">128</a></li>
+				<li><a class="icon solid fa-comment" id="comment{$pic['pic_id']}">{$c}</a></li>
 			</ul>
 		</section>
-		<section class="show-comments mt-5 border">
+		<section class="show-comments mt-5" id="commentList{$pic['pic_id']}">
 			<div class="container">
 				<div class="row">
-					<div class="comments col-12">
-						<div class="pic-date">
-							<time class="published" datetime="2015-11-01">{$pic['timedate']}</time>
-							<a href="user_profile.php?id={$pic['id']}" class="author"><span class="name">{$pic['username']}</span><img src="../{$pic['pfpLink']}" alt="" /></a>
-						</div>
-						<div class="">
-							<p class="" name="" id="">zefzefezf</p>
-						</div>
-					</div>
+HTML;
+				foreach ($fetchedComments as $comment) {
+					if ($comment['picture_id'] == $pic['pic_id']) {
+						$c++;
+						echo <<<HTML
+    <div class="comments col-12 border">
+     <div class="pic-date">
+    	<time class="published" datetime="2015-11-01">{$comment['timedate']}</time>
+    	<a href="user_profile.php?id={$pic['id']}" class="author"><span class="name">{$comment['username']}</span><img src="../{$comment['pfpLink']}" alt="" /></a>
+    </div>
+    <div class="">
+    	<p class="" name="" id="">{$comment['content']}</p>
+    </div>
+    </div>
+HTML;
+					};
+				}
+				echo <<<HTML
 				</div>
 			</div>
 		</section>
@@ -112,7 +123,7 @@ HTML;
 		<!-- Sidebar -->
 		<section id="sidebar">
 
-			
+
 			<!-- Mini Posts -->
 			<section>
 				<div class="mini-posts">

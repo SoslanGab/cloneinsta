@@ -37,3 +37,6 @@ likeBtns.forEach(element => {
 //     });
 //     return response.json();
 // }
+
+
+document.querySelector(".fa-commen")

@@ -11,11 +11,11 @@ require 'connection.php';
 
 
 try {
-    $prepareInsertComment = $pdoInsta->prepare("INSERT INTO comments (content, poster_id, picutre_id) VALUES (:content, :poster_id, :picutre_id)");
+    $prepareInsertComment = $pdoInsta->prepare("INSERT INTO comments (content, poster_id, picture_id) VALUES (:content, :poster_id, :picture_id)");
     $prepareInsertComment->execute([
         ':content' => $msgContent,
         ':poster_id' => $posterId,
-        ':picutre_id' => $pictureId
+        ':picture_id' => $pictureId
     ]);
     header('Location: ../profile.php?info=commentPosted');
     exit();

@@ -1,18 +1,14 @@
 <?php
 
-$data = json_decode(file_get_contents('php://input'), true);
-$pictureId = $data['pictureId'];
 
-require 'connexion.php';
+require 'connection.php';
 
 try {
-    $prepareGetComment = $pdoInsta ->prepare("SELECT * FROM comments WHERE picutre_id = :picutre_id");
-    $prepareGetComment->execute([':picutre_id' => $pictureId]);
-    $fetchedComment = $prepareGetComment->fetchAll();
+    $prepareGetComments = $pdoInsta ->prepare("SELECT * FROM comments INNER JOIN users ON comments.poster_id = users.id");
+    $prepareGetComments->execute();
+    $fetchedComments = $prepareGetComments->fetchAll();
 } catch (PDOException $exception) {
     $_SESSION['lastErrMsg'] = $exception->getMessage();
     header('Location: ../signup.php?err=signupUsernameFetch');
     exit();
 }
-
-echo json_encode($fetchedComment);
