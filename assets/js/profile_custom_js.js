@@ -1,42 +1,39 @@
-// async function getLikes() {
-//     const response = await fetch("actions/get-likes.php", {
-//         method: "POST",
-//         headers: {
-//             "Content-type": "application/json",
-//         },
-//         body: JSON.stringify({ key: 1 }),
-//     });
-//     return response.json();
-// }
-
-
-likeBtns = document.querySelectorAll(".fa-heart");
+document.addEventListener("DOMContentLoaded", () => {
+const likeBtns = document.querySelectorAll(".fa-heart");
 
 likeBtns.forEach(element => {
-    data = 1;
-    element.onclick = async(data)=>{
-        const response = await fetch("actions/like.php", {
-            method: "POST",
-            headers: {
+    element.onclick = async (event) => {
+        let pictureliked = event.target.id.replace("like", "");
+        try {
+            const response = await fetch("actions/like.php", {
+              method: "POST",
+              headers: {
                 "Content-type": "application/json",
-            },
-            body: JSON.stringify({ pictureId: data }),
-        });
-        return response.json();
-    }
-    
+              },
+              body: JSON.stringify({ "pictureId": pictureliked }),
+            });
+          
+            if (!response.ok) {
+              throw new Error("La requête n'a pas abouti !");
+            }
+          
+            const data = await response.json();
+          
+            // Vérification de la validité de la réponse JSON
+            if (typeof data === "object") {
+              // Faites ici ce que vous voulez avec la réponse JSON
+              // Par exemple, vous pouvez mettre à jour l'interface utilisateur en fonction de la réponse.
+              console.log(data);
+            } else {
+              console.error("La réponse n'est pas un objet JSON valide.");
+            }
+          } catch (error) {
+            console.error(error);
+          }          
+    };
+});
 });
 
-// async function likePost(picture) {
-//     const response = await fetch("actions/like.php", {
-//         method: "POST",
-//         headers: {
-//             "Content-type": "application/json",
-//         },
-//         body: JSON.stringify({ pictureId: picture }),
-//     });
-//     return response.json();
-// }
 
 
 function showCommentList(picId){
