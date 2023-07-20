@@ -3,6 +3,9 @@
 session_start();
 
 $data = json_decode(file_get_contents('php://input'), true);
+$_SESSION['LIKE'] = 'test';
+die();
+
 $pictureId = $data['pictureId'];
 $posterId = $_SESSION['idUser'];
 $verification = verifyIfAlreadyLiked($pictureId, $posterId);

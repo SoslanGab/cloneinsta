@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <?php include "header.php"; ?>
 
 <body class="is-preload">
@@ -10,8 +13,21 @@
 			<!-- Post -->
 			<?php
 			include_once "actions/get-pictures.php";
-
+			include_once "actions/get-likes.php";
+			
 			foreach ($fetchedPictures as $pic) {
+				$style = 'style=""';
+				$i = 0;
+				foreach ($fetchedLikes as $values) {
+					if ($values['picture_id'] === $pic['pic_id'] && $values['poster_id'] === $_SESSION['idUser']) {
+						$style = 'style="color: red;"';
+					}
+					foreach ($values as $key => $value) {
+						if ($key === 'picture_id' && $value === $pic['pic_id']) {
+							$i++;
+						}
+					};
+				};
 				echo <<<HTML
     <article class="post">
     <section class="section1">
@@ -54,7 +70,7 @@
         </div>
         <ul class="stats">
             <li><a href="#">General</a></li>
-            <li><a href="#" class="icon solid fa-heart" id="like{$pic['pic_id']}" onclick="likePost({$pic['pic_id']})">28</a></li>
+            <li><a class="icon solid fa-heart" id="like{$pic['pic_id']}" {$style}>{$i}</a></li>
             <li><a href="#" class="icon solid fa-comment">128</a></li>
         </ul>
 	</section>
