@@ -41,10 +41,10 @@ if ($_GET['err']) {
         case 'postPictureFailed':
             # code...
             break;
-        case 'getPictureFailed':
+        case 'getPicturesFailed':
             # code...
             break;
-        case 'null':
+        case 'getLikesFailed':
             # code...
             break;
         default:

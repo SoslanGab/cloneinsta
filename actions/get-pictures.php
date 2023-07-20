@@ -4,12 +4,12 @@
 require 'connection.php';
 
 try {
-    $prepareGetPicture = $pdoInsta ->prepare("SELECT * FROM pictures INNER JOIN users ON pictures.poster_id = users.id");
-    $prepareGetPicture->execute();
-    $fetchedPictures = $prepareGetPicture->fetchAll();
+    $prepareGetPictures = $pdoInsta ->prepare("SELECT * FROM pictures INNER JOIN users ON pictures.poster_id = users.id");
+    $prepareGetPictures->execute();
+    $fetchedPictures = $prepareGetPictures->fetchAll();
 } catch (PDOException $exception) {
     $_SESSION['lastErrMsg'] = $exception->getMessage();
-    header('Location: ../profile.php?err=getPictureFailed');
+    header('Location: ../profile.php?err=getPicturesFailed');
     exit();
 }
 
