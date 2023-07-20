@@ -2952,6 +2952,16 @@ input, select, textarea {
 			margin-top: 80px;
 		}
 
+		.post .container .row .comments .pic-date .author{
+			float: right;
+		}
+
+		@media screen and (max-width: 561px){
+			.post .container .row .comments .pic-date .author{
+				
+			}
+		}
+
 		@media screen and (max-width: 736px) {
 
 			.post {
