@@ -283,3 +283,18 @@ body {
 	box-shadow: inset 0 0 0 2px #a7e245;
 	transform: translateX(30%);
 }
+
+
+/* j'ai ajouté ça */
+.requirementsList {
+	list-style: none;
+}
+
+.requirementNotOk {
+	color: rgb(232, 47, 47);
+}
+
+.requirementOk {
+	color: rgb(150, 231, 29);
+}
+/* fin */
