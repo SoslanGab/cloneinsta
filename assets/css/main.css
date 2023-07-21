@@ -3513,12 +3513,17 @@ input, select, textarea {
 		bottom: 0;
 		left: 0;
 		width: 100%;
-		background-color: #333; /* Remplacez par la couleur de fond souhaitée */
-		color: #fff; /* Remplacez par la couleur de texte souhaitée */
+		height: 100%;
+		background-color: #ffffff;
+		border-bottom: solid 1px rgba(160, 160, 160, 0.3);
 	}
 
-	#footer .icons {
-		color: #aaaaaa;
+	#footer .nav .nav-item a {
+		font-family: "Raleway", Helvetica, sans-serif;
+		font-size: 0.7em;
+		font-weight: 400;
+		letter-spacing: 0.25em;
+		text-transform: uppercase;
 	}
 
 	#footer .copyright {

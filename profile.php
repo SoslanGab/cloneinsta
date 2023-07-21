@@ -146,9 +146,7 @@ HTML;
 				<h2>A PROPOS DE ALIGRAM</h2>
 				<p>Aligram est un clone de instagram crée en 2023 par deux migrant issu des pays de l'est, conçus pour que les gens puissent s'exrpimé librement</p>
 			</section>
-
-			<?php include "footer.php"; ?>
-
 		</section>
-
 	</div>
+
+	<?php include "footer.php"; ?>
