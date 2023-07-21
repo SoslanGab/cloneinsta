@@ -9,6 +9,7 @@ $posterId = $_SESSION['idUser'];
 $username = $_SESSION['username'];
 $uniqueKey = random_int(1, 999);
 $imgUploadError = $_FILES['uploadPicture']['error'];
+$lastPost = date("Y-m-d H:i:s");
 
 
 if ($imgUploadError === UPLOAD_ERR_OK) {
@@ -37,27 +38,40 @@ if ($imgUploadError === UPLOAD_ERR_OK) {
 }
 
 
-function postPicture($posterId, string $imgPath, string $title, string $text)
+function postPicture($posterId, $lastPost, string $imgPath, string $title, string $text)
 {
 
     require "connection.php";
 
     try {
-        $prepareInsertComment = $pdoInsta->prepare("INSERT INTO pictures (picture_link, img_title, img_text, poster_id) VALUES (:picture_link, :img_title, :img_text, :poster_id)");
-        $prepareInsertComment->execute([
+        $prepareInsertPicture = $pdoInsta->prepare("INSERT INTO pictures (picture_link, img_title, img_text, poster_id) VALUES (:picture_link, :img_title, :img_text, :poster_id)");
+        $prepareInsertPicture->execute([
             ':picture_link' => $imgPath,
             ':img_title' => $title,
             ':img_text' => $text,
             ':poster_id' => $posterId
         ]);
-        header('Location: ../profile.php?info=pictureUploadSuccess');
-        exit();
+
     } catch (PDOException $exception) {
         $_SESSION['lastErrMsg'] = $exception->getMessage();
         header('Location: ../profile.php?err=postPictureFailed');
         exit();
     }
+
+    try {
+        $prepareInsertLastPictureUpdate = $pdoInsta->prepare("UPDATE users SET last_post = :last_post WHERE id = :id");
+        $prepareInsertLastPictureUpdate->execute([
+            ':last_post' => $lastPost,
+            ':id' => $posterId
+        ]);
+        header('Location: ../profile.php?info=pictureUploadSuccess');
+        exit();
+    } catch (PDOException $exception) {
+        $_SESSION['lastErrMsg'] = $exception->getMessage();
+        header('Location: ../profile.php?err=insertLastPictureUpdateFailed');
+        exit();
+    }
 }
 
 
-postPicture($posterId, $imgPath, $title, $text);
+postPicture($posterId, $lastPost, $imgPath, $title, $text);
