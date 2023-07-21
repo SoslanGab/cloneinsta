@@ -15,6 +15,8 @@ try {
         ':poster_id' => $posterId,
         ':picture_id' => $pictureId
     ]);
+    header('Location: ../profile.php?info=commentPosted');
+    exit();
 } catch (PDOException $exception) {
     $_SESSION['lastErrMsg'] = $exception->getMessage();
     header('Location: ../profile.php?err=commentPostFailed');
