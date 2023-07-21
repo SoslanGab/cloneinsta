@@ -1808,7 +1808,7 @@ input, select, textarea {
 		}
 
 		.author img {
-			border-radius: 100%;
+			border-radius: 30%;
 			display: block;
 			width: 4em;
 		}
@@ -2800,6 +2800,7 @@ input, select, textarea {
 
 		.post > a.image.featured {
 			overflow: hidden;
+			max-width: 75%;
 		}
 
 			.post > a.image.featured img {
@@ -3505,6 +3506,16 @@ input, select, textarea {
 	}
 
 /* Footer */
+	#footer #div_footer {
+		text-align: center;
+	}
+	#footer {
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		background-color: #333; /* Remplacez par la couleur de fond souhaitée */
+		color: #fff; /* Remplacez par la couleur de texte souhaitée */
+	}
 
 	#footer .icons {
 		color: #aaaaaa;

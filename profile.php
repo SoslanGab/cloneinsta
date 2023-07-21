@@ -49,7 +49,7 @@ if (!isset($_SESSION['idUser'])) {
 				<a href="user_profile.php?id={$pic['id']}" class="author"><span class="name">{$pic['username']}</span><img src="../{$pic['pfpLink']}" alt="" /></a>
 			</div>
 		</section>
-		<a href="user_profile.php?id={$pic['id']}" class="image featured"><img src="{$pic['picture_link']}" alt="" /></a>
+		<a href="user_profile.php?id={$pic['id']}" class="image featured mx-auto"><img src="{$pic['picture_link']}" alt="" /></a>
 		<p>{$pic['img_text']}</p>
 		<section class="section2">
 			<div class="actions mx-auto">
