@@ -15,7 +15,7 @@ if (!isset($_SESSION['idUser'])) {
 		<div id="main">
 
 			<!-- Post -->
-<?php
+			<?php
 			include_once "actions/get-pictures.php";
 			include_once "actions/get-likes.php";
 			include_once "actions/get-comments.php";
@@ -38,8 +38,9 @@ if (!isset($_SESSION['idUser'])) {
 				foreach ($fetchedComments as $comment) {
 					if ($comment['picture_id'] == $pic['pic_id']) {
 						$c++;
-					}};
-echo <<<HTML
+					}
+				};
+				echo <<<HTML
     <article class="post">
 		<section class="section1">
 			<div class="title">
@@ -91,12 +92,14 @@ echo <<<HTML
 			<div class="container">
 				<div class="row">
 HTML;
-foreach ($fetchedComments as $comment) {
-if ($comment['picture_id'] == $pic['pic_id']) {
-echo <<<HTML
+				foreach ($fetchedComments as $comment) {
+
+					if ($comment['picture_id'] == $pic['pic_id']) {
+						$commentTimedate = date("F j, Y H:i:s", strtotime($comment['timedate']));
+						echo <<<HTML
     <div class="comments col-12 border">
      <div class="pic-date">
-    	<time class="published" datetime="2015-11-01">{$comment['timedate']}</time>
+    	<time class="published" datetime="2015-11-01">{$commentTimedate}</time>
     	<a href="user_profile.php?id={$pic['id']}" class="author"><span class="name">{$comment['username']}</span><img src="../{$comment['pfpLink']}" alt="" /></a>
     </div>
     <div class="">
@@ -104,16 +107,16 @@ echo <<<HTML
     </div>
     </div>
 HTML;
-};
-}		
-echo <<<HTML
+					};
+				}
+				echo <<<HTML
 				</div>
 			</div>
 		</section>
 </article>
 HTML;
-}
-echo <<<HTML
+			}
+			echo <<<HTML
 		</div>
 
 
@@ -123,31 +126,39 @@ echo <<<HTML
 			<section>
 				<ul class="posts">
 HTML;
-include_once "actions/get-users.php";
-foreach($fetchedUsers as $user){
-echo <<<HTML
+			include_once "actions/get-users.php";
+			foreach ($fetchedUsers as $user) { {
+					if (isset($user["last_post"])) {
+						$lastPostTimeDate = date("F j, Y H:i", strtotime($user["last_post"]));
+						$lastPostText = "LAST POST: $lastPostTimeDate";
+					} else {
+						$lastPostText = "";
+					}
+				}
+				echo <<<HTML
 					<li>
 						<article>
 							<header>
 								<h3><a href="user_profile.php?id={$user['id']}">{$user['username']}</a></h3>
+								<p>{$lastPostText}</p>
 							</header>
 							<a href="user_profile.php?id={$user['id']}" class="image"><img src="{$user['pfpLink']}" alt="" /></a>
 						</article>
 					</li>
 HTML;
-}
-echo <<<HTML
+			}
+			echo <<<HTML
 				</ul>
 			</section>
 HTML;
 
-		?>
+			?>
 			<!-- About -->
 			<section class="blurb">
 				<h2>A PROPOS DE ALIGRAM</h2>
 				<p>Aligram est un clone de instagram crée en 2023 par deux migrant issu des pays de l'est, conçus pour que les gens puissent s'exrpimé librement</p>
 			</section>
-		</section>
-	</div>
+			</section>
+		</div>
 
-	<?php include "footer.php"; ?>
+		<?php include "footer.php"; ?>
