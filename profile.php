@@ -15,7 +15,7 @@ if (!isset($_SESSION['idUser'])) {
 		<div id="main">
 
 			<!-- Post -->
-			<?php
+<?php
 			include_once "actions/get-pictures.php";
 			include_once "actions/get-likes.php";
 			include_once "actions/get-comments.php";
@@ -38,7 +38,7 @@ if (!isset($_SESSION['idUser'])) {
 					if ($comment['picture_id'] == $pic['pic_id']) {
 						$c++;
 					}};
-				echo <<<HTML
+echo <<<HTML
     <article class="post">
 		<section class="section1">
 			<div class="title">
@@ -90,9 +90,9 @@ if (!isset($_SESSION['idUser'])) {
 			<div class="container">
 				<div class="row">
 HTML;
-				foreach ($fetchedComments as $comment) {
-					if ($comment['picture_id'] == $pic['pic_id']) {
-						echo <<<HTML
+foreach ($fetchedComments as $comment) {
+if ($comment['picture_id'] == $pic['pic_id']) {
+echo <<<HTML
     <div class="comments col-12 border">
      <div class="pic-date">
     	<time class="published" datetime="2015-11-01">{$comment['timedate']}</time>
@@ -103,16 +103,16 @@ HTML;
     </div>
     </div>
 HTML;
-					};
-				}
-				echo <<<HTML
+};
+}		
+echo <<<HTML
 				</div>
 			</div>
 		</section>
 </article>
 HTML;
-			}
-			?>
+}
+echo <<<HTML
 		</div>
 
 
@@ -121,18 +121,26 @@ HTML;
 			<!-- Posts List -->
 			<section>
 				<ul class="posts">
+HTML;
+include_once "actions/get-users.php";
+foreach($fetchedUsers as $user){
+echo <<<HTML
 					<li>
 						<article>
 							<header>
-								<h3><a href="single.html">Lorem ipsum fermentum ut nisl vitae</a></h3>
-								<time class="published" datetime="2015-10-20">October 20, 2015</time>
+								<h3><a href="user_profile.php?id={$user['id']}">{$user['username']}</a></h3>
 							</header>
-							<a href="single.html" class="image"><img src="images/pic08.jpg" alt="" /></a>
+							<a href="user_profile.php?id={$user['id']}" class="image"><img src="{$user['pfpLink']}" alt="" /></a>
 						</article>
 					</li>
+HTML;
+}
+echo <<<HTML
 				</ul>
 			</section>
+HTML;
 
+		?>
 			<!-- About -->
 			<section class="blurb">
 				<h2>A PROPOS DE ALIGRAM</h2>
