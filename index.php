@@ -43,7 +43,7 @@ if (isset($_SESSION['idUser'])) {
                         </div>
                         <div class="input-block">
                             <label for="password">Password</label>
-                            <input type="password" name="password" required="required">
+                            <input type="password" name="password" id="blya" required="required">
                         </div>
                         <div class="">
                             <input type="checkbox" name="rememberMe" checked>Remember me</input>
