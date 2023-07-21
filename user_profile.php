@@ -1,92 +1,74 @@
+<?php
+session_start();
+if (!isset($_SESSION['idUser'])) {
+	header('Location: index.php?err=userNotLoggedIn');
+	exit();
+}
 
-				<!-- Header -->
-				<?php include "header.php";?>
-	<body class="single is-preload">
+if (isset($_GET['id'])) {
+	$currentUser = $_GET['id'];
+} else {
+	$currentUser = $_SESSION['idUser'];
+}
 
-		<!-- Wrapper -->
-			<div id="wrapper">
+include_once "actions/get-users.php";
+include_once "actions/get-pictures.php";
 
-				<!-- Menu -->
-					<section id="menu">
+$users = [];
+foreach($fetchedUsers as $user){
+	$id = $user['id'];
+	$users[$id] = $user;
+}
 
-						<!-- Search -->
-							<section>
-								<form class="search" method="get" action="#">
-									<input type="text" name="query" placeholder="Search" />
-								</form>
-							</section>
+?>
+<!-- Header -->
+<?php include "header.php"; ?>
 
-						<!-- Links -->
-							<section>
-								<ul class="links">
-									<li>
-										<a href="#">
-											<h3>Lorem ipsum</h3>
-											<p>Feugiat tempus veroeros dolor</p>
-										</a>
-									</li>
-									<li>
-										<a href="#">
-											<h3>Dolor sit amet</h3>
-											<p>Sed vitae justo condimentum</p>
-										</a>
-									</li>
-									<li>
-										<a href="#">
-											<h3>Feugiat veroeros</h3>
-											<p>Phasellus sed ultricies mi congue</p>
-										</a>
-									</li>
-									<li>
-										<a href="#">
-											<h3>Etiam sed consequat</h3>
-											<p>Porta lectus amet ultricies</p>
-										</a>
-									</li>
-								</ul>
-							</section>
+<body class="single is-preload">
 
-						<!-- Actions -->
-							<section>
-								<ul class="actions stacked">
-									<li><a href="#" class="button large fit">Log In</a></li>
-								</ul>
-							</section>
+	<!-- Wrapper -->
+	<div id="wrapper">
 
-					</section>
 
-				<!-- Main -->
-					<div id="main">
-					<!-- Post -->
-						<article class="post">
-							<header>
-								<div class="title">
-									<h2><a href="#">Magna sed adipiscing</a></h2>
-									<p>Lorem ipsum dolor amet nullam consequat etiam feugiat</p>
-								</div>
-								<div class="meta">
-									<time class="published" datetime="2015-11-01">November 1, 2015</time>
-									<a href="#" class="author"><span class="name">Jane Doe</span><img src="images/avatar.jpg" alt="" /></a>
-								</div>
-							</header>
-							<div class="card" style="width: 25rem;">
-								<div class="card">
-									<img style="height: 20rem;" class="" src="images/pic01.jpg" >
-								</div>
-							</div>
-						</article>
+		<!-- Main -->
+		<div id="main">
+			<!-- Post -->
+			<article class="post">
+				<header>
+					<div class="title">
+						<h2><a href="user_profile.php?id=<?=$users[$currentUser]['id']?>"><?=$users[$currentUser]['username']?></a></h2>
 					</div>
-				<!-- Footer -->
-					<?php include 'footer.php'; ?>
+					<div class="meta">
+						<a href="user_profile.php?id=<?=$users[$currentUser]['id']?>" class="author"><span class="name"><?=$users[$currentUser]['username']?> </span><img src="<?=$users[$currentUser]['pfpLink']?>" alt="" /></a>
+					</div>
+				</header>
+				<?php
+foreach($fetchedPictures as $picture){
+	if($picture['poster_id'] == $currentUser){
+echo <<<HTML
+				<div class="card" style="width: 25rem;">
+					<div class="card">
+						<img style="height: 20rem;" class="" src="{$picture['picture_link']}">
+					</div>
+				</div>
+HTML;
+}
+}
+				?>
+			</article>
+		</div>
+		<!-- Footer -->
+		<?php include 'footer.php'; ?>
 
-			</div>
+	</div>
 
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/browser.min.js"></script>
+	<script src="assets/js/breakpoints.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/main.js"></script>
 
-	</body>
+</body>
+
 </html>
