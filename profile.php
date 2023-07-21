@@ -23,6 +23,7 @@ if (!isset($_SESSION['idUser'])) {
 			foreach ($fetchedPictures as $pic) {
 				$style = 'style=""';
 				$i = 0;
+				$timedate = date("F j, Y H:i", strtotime($pic['timedate']));
 				foreach ($fetchedLikes as $values) {
 					if ($values['picture_id'] === $pic['pic_id'] && $values['poster_id'] === $_SESSION['idUser']) {
 						$style = 'style="color: red;"';
@@ -45,7 +46,7 @@ echo <<<HTML
 				<h2><a href="user_profile.php?id={$pic['id']}">{$pic['img_title']}</a></h2>
 			</div>
 			<div class="meta">
-				<time class="published" datetime="2015-11-01">{$pic['timedate']}</time>
+				<time class="published" datetime="2015-11-01">{$timedate}</time>
 				<a href="user_profile.php?id={$pic['id']}" class="author"><span class="name">{$pic['username']}</span><img src="../{$pic['pfpLink']}" alt="" /></a>
 			</div>
 		</section>

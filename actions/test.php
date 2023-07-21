@@ -19,5 +19,10 @@ session_start();
 <?= var_dump($_COOKIE) ?>
 </pre>
 
+<pre>
+<?= $_SESSION['test'] ?>
+</pre>
+
+
 </body>
 </html>
