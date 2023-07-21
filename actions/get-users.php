@@ -4,7 +4,7 @@
 require 'connection.php';
 
 try {
-    $prepareUsers = $pdoInsta ->prepare("SELECT * FROM users");
+    $prepareUsers = $pdoInsta ->prepare("SELECT * FROM users ORDER BY last_post DESC");
     $prepareUsers->execute();
     $fetchedUsers = $prepareUsers->fetchAll();
 } catch (PDOException $exception) {
