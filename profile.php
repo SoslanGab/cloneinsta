@@ -83,7 +83,6 @@ if (!isset($_SESSION['idUser'])) {
 				</div>
 			</div>
 			<ul class="stats">
-				<li><a href="#">General</a></li>
 				<li><a class="icon solid fa-heart" id="like{$pic['pic_id']}" {$style}>{$i}</a></li>
 				<li><a class="icon solid fa-comment" onclick="showCommentList({$pic['pic_id']})">{$c}</a></li>
 			</ul>

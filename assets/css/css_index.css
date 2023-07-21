@@ -298,3 +298,19 @@ body {
 	color: rgb(150, 231, 29);
 }
 /* fin */
+
+/* Styles pour les champs de saisie normaux */
+input[type="text"],
+input[type="password"],
+input[type="file"] {
+  /* Ajoutez les styles de bordure que vous souhaitez pour les champs normaux ici */
+  border: 1px solid #cddbef; /* Exemple: bordure grise */
+}
+
+/* Styles pour les champs de saisie en focus */
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="file"]:focus {
+  /* Ajoutez les styles de bordure que vous souhaitez pour les champs en focus ici */
+  border-color: #a7e245; /* Exemple: bordure verte */
+}

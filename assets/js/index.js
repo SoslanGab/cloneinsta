@@ -13,6 +13,11 @@ const loginInput = document.getElementsByName('createLogin');
 const passwordInput = document.getElementsByName('createPassword');
 const passwordConfirmationInput = document.getElementsByName('confirmPassword');
 
+const listOfReqUsername = document.querySelector('#usernameRequirements');
+const listOfReqLogin = document.querySelector('#loginRequirements');
+const listOfReqPassword = document.querySelector('#pwdRequirements');
+
+
 
 const usernameRequirements = [
 	{regex: /^.{2,12}$/, index: 0},
@@ -32,6 +37,7 @@ const passwordRequirements = [
 ]
 
 
+
 usernameInput.addEventListener("keyup", (event)=>{
 	usernameRequirements.forEach(item => {
 		let isValid = item.regex.test(event.target.value);
@@ -43,6 +49,18 @@ usernameInput.addEventListener("keyup", (event)=>{
 		}
 	})
 })
+
+
+listOfReqUsername.addEventListener("focus", (event)=>{
+	console.log("success")
+	event.target.hidden = false;
+})
+
+
+listOfReqUsername.addEventListener("blur", (event)=>{
+	event.target.hidden = true;
+})
+
 
 
 loginInput.addEventListener("keyup", (event)=>{
@@ -58,6 +76,17 @@ loginInput.addEventListener("keyup", (event)=>{
 })
 
 
+listOfReqLogin.addEventListener("focus", (event)=>{
+	event.target.hidden = false;
+})
+
+
+listOfReqLogin.addEventListener("blur", (event)=>{
+	event.target.hidden = true;
+})
+
+
+
 passwordInput.addEventListener("keyup", (event)=>{
 	passwordRequirements.forEach(item => {
 		let isValid = item.regex.test(event.target.value);
@@ -68,4 +97,14 @@ passwordInput.addEventListener("keyup", (event)=>{
 			
 		}
 	})
+})
+
+
+listOfReqPassword.addEventListener("focus", (event)=>{
+
+})
+
+
+listOfReqPassword.addEventListener("blur", (event)=>{
+
 })
