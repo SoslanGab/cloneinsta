@@ -4,7 +4,7 @@ if (isset($_SESSION['idUser'])) {
     header('Location: profile.php?info=userLoggedIn');
     exit();
 } else if(isset($_COOKIE['stayLoggedIn'])){
-    $_SESSION['idUser'] = $_COOKIE['id'];
+    $_SESSION['idUser'] = (int)$_COOKIE['id'];
     $_SESSION['username'] = $_COOKIE['username'];
     $_SESSION['pfpLink'] = $_COOKIE['pfpLink'];
     header('Location: profile.php?info=userAutoLoggedIn');

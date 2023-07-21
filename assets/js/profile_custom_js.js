@@ -19,14 +19,15 @@ likeBtns.forEach(element => {
           
             const data = await response.json();
           
-            // Vérification de la validité de la réponse JSON
-            if (typeof data === "object") {
-              // Faites ici ce que vous voulez avec la réponse JSON
-              // Par exemple, vous pouvez mettre à jour l'interface utilisateur en fonction de la réponse.
-              console.log(data);
-            } else {
-              console.log(data);
-              console.error("La réponse n'est pas un objet JSON valide.");
+
+            if (data['likestatus'] === "posted") {
+              event.target.style = "color: red;";
+              let currentLikes = parseInt(event.target.innerHTML);
+              event.target.innerHTML = currentLikes+1;
+            } else if(data['likestatus'] === "removed") {
+              event.target.style = "";
+              let currentLikes = parseInt(event.target.innerHTML);
+              event.target.innerHTML = currentLikes-1;
             }
           } catch (error) {
             console.error(error);
@@ -38,7 +39,10 @@ likeBtns.forEach(element => {
 
 
 function showCommentList(picId){
-    let commentDiv = document.querySelector(`#commentList${picId}`);
+  let commentDiv = document.querySelector(`#commentList${picId}`);
+  if(commentDiv.hidden === true){
     commentDiv.hidden = false;
-
+  } else {
+    commentDiv.hidden = true;
+  }
 }
