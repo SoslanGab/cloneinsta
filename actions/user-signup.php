@@ -3,6 +3,8 @@ session_set_cookie_params(time() + 86400 * 365, "/", true, true);
 session_start();
 unset($_SESSION['signupErr']);
 
+$registerDate = date("Y-m-d");
+
 
 function validateLogin($login)
 {
@@ -41,7 +43,7 @@ function validateUsername($username, $login)
 }
 
 
-function signup($login, $password, $username, $image)
+function signup($login, $password, $username, $image, $date)
 {
     require 'connection.php';
 
@@ -69,12 +71,14 @@ function signup($login, $password, $username, $image)
         $passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
         try {
-            $prepareSignup = $pdoInsta->prepare("INSERT INTO users (username, login, password, pfpLink) VALUES (:username, :login, :password, :image)");
+            $prepareSignup = $pdoInsta->prepare("INSERT INTO users (username, login, password, pfpLink, register_date) VALUES (:username, :login, :password, :image, :register_date)");
             $prepareSignup->execute([
                 ':username' => $username,
                 ':login' => $login,
                 ':password' => $passwordHash,
-                ':image' => $image
+                ':image' => $image,
+                ':register_date' => $date
+
             ]);
         } catch (PDOException $exception) {
             $_SESSION['lastErrMsg'] = $exception->getMessage();
@@ -151,8 +155,8 @@ if ($imgUploadError === UPLOAD_ERR_OK) {
     }
 }
 
-if (isset($login) && isset($password) && isset($username) && isset($imgPath) && !isset($_SESSION['signupErr'])) {
-    signup($login, $password, $username, $imgPath);
+if (isset($login) && isset($password) && isset($username) && isset($imgPath) && isset($registerDate) && !isset($_SESSION['signupErr'])) {
+    signup($login, $password, $username, $imgPath, $registerDate);
 } else {
     echo "Something went wrong!";
     echo $_SESSION['signupErr'];

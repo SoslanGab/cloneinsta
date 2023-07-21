@@ -33,6 +33,7 @@ foreach($fetchedUsers as $user){
 				<section1>
 					<div class="title">
 						<h2><a href="user_profile.php?id=<?=$users[$currentUser]['id']?>"><?=$users[$currentUser]['username']?></a></h2>
+						<p>Registration date : <?=$date_formatee = date("F j, Y", strtotime($users[$currentUser]['register_date']))?></p>
 					</div>
 					<div class="meta">
 						<a href="user_profile.php?id=<?=$users[$currentUser]['id']?>" class="author"><span class="name"><?=$users[$currentUser]['username']?> </span><img src="<?=$users[$currentUser]['pfpLink']?>" alt="" /></a>
