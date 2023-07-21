@@ -44,7 +44,10 @@ function postLike($pictureId, $posterId)
             ':picture_id' => $pictureId,
             ':poster_id' => $posterId,
         ]);
-        echo json_encode("postLikeSuccess");
+        $success = [
+            "likestatus" => "posted", 
+        ];
+        echo json_encode($success);
     } catch (PDOException $exception) {
         $_SESSION['lastErrMsg'] = $exception->getMessage();
         header('Location: ../index.php?err=postCommentFailed');
@@ -65,7 +68,10 @@ function removeLike($pictureId, $posterId)
             ':picture_id' => $pictureId,
             ':poster_id' => $posterId,
         ]);
-        echo json_encode("removeLikeSuccess");
+        $success = [
+            "likestatus" => "removed", 
+        ];
+        echo json_encode($success);
     } catch (PDOException $exception) {
         $_SESSION['lastErrMsg'] = $exception->getMessage();
         header('Location: ../index.php?err=postCommentFailed');
