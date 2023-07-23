@@ -47,14 +47,13 @@ foreach($fetchedPictures as $picture){
 echo <<<HTML
 			
 					<div class="col-4">
-						<div class="card-profile">
+						<div class="card-profile mb-3">
 							<img class="" src="{$picture['picture_link']}" alt="Description de l'image">
 						</div>
 					</div>
 HTML;
 }
 }
-
 				?>
 				</div>
 			</div>
