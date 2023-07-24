@@ -7,11 +7,12 @@ switchers.forEach(item => {
 	})
 })
 
+window.addEventListener("DOMContentLoaded", () => {
 
-const usernameInput = document.getElementsByName('createUsername');
-const loginInput = document.getElementsByName('createLogin');
-const passwordInput = document.getElementsByName('createPassword');
-const passwordConfirmationInput = document.getElementsByName('confirmPassword');
+const usernameInput = document.querySelector("input[name=createUsername]")
+const loginInput = document.querySelector("input[name=createLogin]")
+const passwordInput = document.querySelector("input[name=createPassword]")
+const passwordConfirmationInput = document.querySelector("input[name=confirmPassword]")
 
 const listOfReqUsername = document.querySelector('#usernameRequirements');
 const listOfReqLogin = document.querySelector('#loginRequirements');
@@ -51,14 +52,16 @@ usernameInput.addEventListener("keyup", (event)=>{
 })
 
 
-listOfReqUsername.addEventListener("focus", (event)=>{
+
+
+usernameInput.addEventListener("focus", ()=>{
 	console.log("success")
-	event.target.hidden = false;
+	listOfReqUsername.hidden = false;
 })
 
 
-listOfReqUsername.addEventListener("blur", (event)=>{
-	event.target.hidden = true;
+usernameInput.addEventListener("blur", ()=>{
+	listOfReqUsername.hidden = true;
 })
 
 
@@ -76,13 +79,13 @@ loginInput.addEventListener("keyup", (event)=>{
 })
 
 
-listOfReqLogin.addEventListener("focus", (event)=>{
-	event.target.hidden = false;
+loginInput.addEventListener("focus", ()=>{
+	listOfReqLogin.hidden = false;
 })
 
 
-listOfReqLogin.addEventListener("blur", (event)=>{
-	event.target.hidden = true;
+loginInput.addEventListener("blur", ()=>{
+	listOfReqLogin.hidden = true;
 })
 
 
@@ -100,11 +103,14 @@ passwordInput.addEventListener("keyup", (event)=>{
 })
 
 
-listOfReqPassword.addEventListener("focus", (event)=>{
+passwordInput.addEventListener("focus", ()=>{
+	listOfReqPassword.hidden = false;
 
 })
 
 
-listOfReqPassword.addEventListener("blur", (event)=>{
+passwordInput.addEventListener("blur", ()=>{
+	listOfReqPassword.hidden = true;
 
+})
 })
