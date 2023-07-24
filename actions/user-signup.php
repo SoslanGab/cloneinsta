@@ -129,7 +129,7 @@ if ($loginErr || $passwordErr || $usernameErr) {
     $_SESSION['signupErr']['createLogin'] = $loginErr;
     $_SESSION['signupErr']['createPassword'] = $passwordErr;
     $_SESSION['signupErr']['createUsername'] = $usernameErr;
-    header('Location: ../signup.php?err=signupRequirements');
+    header('Location: ../index.php?err=signupRequirements');
     exit();
 }
 
