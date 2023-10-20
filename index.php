@@ -62,7 +62,7 @@ if (isset($_SESSION['idUser'])) {
                     <fieldset>
                         <legend>Veuillez remplir ce formulaire pour pouvoir vous inscrire</legend>
                         <div class="input-block">
-                            <label for="createUsername">Username :</label>
+                            <label for="createUsername">Username* </label>
                             <input type="text" name="createUsername" required>
                             <ul class="requirementsList" id="usernameRequirements" hidden>
                                 <li id="usernameRequirementLenght">Longeur: 2 à 12 caractères</li>
@@ -70,7 +70,7 @@ if (isset($_SESSION['idUser'])) {
                             </ul>
                         </div>
                         <div class="input-block">
-                            <label for="signup-email">Login</label>
+                            <label for="signup-email">Login*</label>
                             <input type="text" name="createLogin" id="signup-email" required>
                             <ul class="requirementsList" id="loginRequirements" hidden>
                                 <li id="loginRequirementLenght">Longeur: 6 à 12 caractères</li>
@@ -78,7 +78,7 @@ if (isset($_SESSION['idUser'])) {
                             </ul>
                         </div>
                         <div class="input-block">
-                            <label for="signup-password">Password</label>
+                            <label for="signup-password">Password*</label>
                             <input type="password" name="createPassword" required>
                             <ul class="requirementsList" id="pwdRequirements" hidden>
                                 <li id="pwdRequirementLenght">Longeur: 6 à 12 caractères</li>
@@ -88,11 +88,12 @@ if (isset($_SESSION['idUser'])) {
                             </ul>
                         </div>
                         <div class="input-block">
-                            <label for="signup-password-confirm">Confirm password</label>
+                            <label for="signup-password-confirm">Confirm password*</label>
                             <input type="password" name="confirmPassword" required>
                         </div>
                         <div class="input-block">
-                            <label for="uploadProfileImage">Profile picture :</label>
+                            <label for="uploadProfileImage">Profile picture* </label>
+                          
                             <input type="hidden" name="MAX_FILE_SIZE" value="3000000">
                             <input type="file" name="uploadProfileImage" accept="image/*">
                         </div>
